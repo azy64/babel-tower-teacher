@@ -20,11 +20,11 @@ export default function Login() {
   };
   return (vanish === true
     ? (
-      <div style={{ display: 'block' }}>
-        <h1>LOgin</h1>
+      <div className="login-block" style={{ display: 'block' }}>
+        <h1>Login</h1>
         <form>
           <div>
-            <input onChange={((event) => { setEmail(event.target.value); })} type="email" placeholher="entrer votre email" />
+            <input onChange={((event) => { setEmail(event.target.value); })} type="email" placeholder="entrer votre email" />
           </div>
           <div>
             <input onChange={(event) => { setPassword(event.target.value); }} type="password" placeholder="saisissz votre mot de passe" />

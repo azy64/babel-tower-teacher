@@ -87,6 +87,17 @@ export const signInTeacher = createAsyncThunk('login/signInT', (teacher) => {
     .then((result) => result.json())
     .then((data) => data);
 });
+
+export const regeisterTeacher = createAsyncThunk('login/register', (teacher) => fetch(`${BABEL_TOWER_BASE_URL}teacher/create`, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify(teacher),
+
+})
+  .then((result) => result.json())
+  .then((data) => data));
 const loginSlice = createSlice({
   initialState: init,
   name: 'login',
@@ -118,6 +129,12 @@ const loginSlice = createSlice({
     });
     builder.addCase(signInStudent.pending, (state) => {
       state.loading = true;
+    });
+    builder.addCase(regeisterTeacher.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+    builder.addCase(regeisterTeacher.rejected, (state, action) => {
+      state.error = action.error.message;
     });
   },
 });

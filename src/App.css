@@ -36,3 +36,135 @@
     transform: rotate(360deg);
   }
 }
+
+.login-block {
+  width: 60%;
+  margin: auto;
+  margin-top: 3.5%;
+  margin-bottom: 9px;
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.login-block h1 {
+  text-align: center;
+}
+
+.login-block input {
+  width: 90% !important;
+  height: 35px !important;
+  padding: 8px;
+  margin: 20px;
+  font-size: 20px;
+}
+
+.login-block select {
+  width: 92% !important;
+  padding: 8px;
+  margin: 20px;
+  font-size: 20px;
+}
+
+.login-block input::placeholder {
+  font-size: 20px;
+}
+
+.login-block button {
+  border: none;
+  width: auto;
+  font-size: 20px;
+  padding: 15px;
+  background-color: #282c34;
+  color: white;
+  display: block;
+  margin: auto;
+  margin-bottom: 9px;
+
+}
+
+.window-lesson, .window-contenu, .window-question {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height:100vh;
+  background-color: rgba(36, 36, 36, 0.5);
+}
+
+.window-lesson {
+  z-index: 1;
+}
+
+.window-contenu {
+  z-index: 2;
+}
+
+.window-question {
+  z-index: 3;
+}
+
+.window-lesson form, .window-contenu form, .window-question form {
+  width:60%;
+  margin: auto;
+  margin-top: 4%;
+  background-color: white;
+  box-shadow: 2px 1px 8px #282c34;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.btn-tunaweza {
+    border: none;
+    width: auto;
+    font-size: 20px;
+    padding: 15px;
+    background-color: #282c34;
+    color: white;
+    display: block;
+    margin: auto;
+    margin-bottom: 9px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.close {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(139, 31, 31);
+  color: white;
+  padding: 10px;
+  border-radius: 100px;
+  font-size: 19px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  top: -28px;
+  left: 26px;
+}
+
+.text-right {
+  text-align: end;
+}
+
+.block-input {
+  width:70%;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.block-input input {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+}
+
+.block-input input::placeholder {
+  font-size: 20px;
+}
+
+.bad {
+  color: red;
+  font-size: 15px;
+}

@@ -160,6 +160,12 @@
   font-size: 20px;
 }
 
+.block-input select {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+}
+
 .block-input input::placeholder {
   font-size: 20px;
 }
@@ -167,4 +173,11 @@
 .bad {
   color: red;
   font-size: 15px;
+}
+
+.classroom {
+  box-shadow: 2px 1px 8px #282c34;
+  border-radius: 8px;
+  padding: 4px;
+  width: 90%;
 }

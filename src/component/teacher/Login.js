@@ -8,19 +8,23 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const d = useSelector((state) => state.login.loading);
-  const user = useSelector((state) => state.login.user.result);
-  const [vanish, setVanish] = useState();
+  const user = useSelector((state) => state.login.user);
+  const [vanish, setVanish] = useState(d);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     setVanish(d);
-  }, [d]);
+    if (user?.email) {
+      navigate('/dashboard');
+    } else setError('Email ou mot de passe incorrecte');
+  }, [d, user]);
   const connecter = () => {
     dispatch(signInTeacher({ email, password }));
     // dispatch(loginDisplay());
     setEmail('');
     setPassword('');
-    if (user !== {} || user !== null) navigate('/dashboard');
+    // if (user.email) navigate('/dashboard');
   };
   return (vanish === true
     ? (
@@ -33,7 +37,7 @@ export default function Login() {
           <div>
             <input onChange={(event) => { setPassword(event.target.value); }} type="password" placeholder="saisissez votre mot de passe" />
           </div>
-
+          <h4 className="bad">{error}</h4>
           <button type="button" onClick={connecter}>Se connecter</button>
           <span>
             ou veuillez creer un compte

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import ContenuForm from './ContenuForm';
+import DisplayLessons from './DisplayLessons';
 import LessonForm from './LessonForm';
 import QuestionForm from './QuestionForm';
 
@@ -7,6 +9,7 @@ function Lesson() {
   const [lessonFormVisibility, setLessonFormVisibility] = useState(false);
   const [contentFormVisibility, setContentFormVisibility] = useState(false);
   const [questionFormVisibility, setQuestionFormVisibility] = useState(false);
+  const lessonsInDataBase = useSelector((state) => state.lessons);
   const [lesson, setLesson] = useState({});
   return (
     <div>
@@ -22,6 +25,9 @@ function Lesson() {
           </button>
         </div>
         <span>Affichage des leçons ici</span>
+        <div>
+          <DisplayLessons lessons={lessonsInDataBase} />
+        </div>
       </div>
       {lessonFormVisibility === true
         ? (

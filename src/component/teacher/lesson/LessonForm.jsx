@@ -1,8 +1,9 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveLesson } from '../../../redux/lessons/lessonsReducer';
 
 function LessonForm({
@@ -12,18 +13,34 @@ function LessonForm({
   const [consigneOne, setConsigneOne] = useState('');
   const [consigneTwo, setConsigneTwo] = useState('');
   const [error, setError] = useState('');
+  const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
-  const submit = () => {
+  const submit = (e) => {
     if (title && consigneOne && consigneTwo) {
-      dispatch(saveLesson(lesson));
+      const formData = new FormData();
+      if (lesson.contents !== undefined && lesson.contents.length > 0) {
+        formData.append('lesson', JSON.stringify(lesson));
+        lesson.contents.map((content) => {
+          const { fichier } = content;
+          formData.append(`fichier_${content.id}`, fichier, `${content.id}.${fichier.name.split('.')[1]}`);
+          return content;
+        });
+
+        setLesson(formData);
+        console.log('voici la lesson avant to send:', formData.get('fichier'));
+        dispatch(saveLesson(formData));
+      } else {
+        alert('ajouter au moins un contenu');
+      }
     }
+    e.preventDefault();
   };
 
   const createLesson = (e) => {
     if (title && consigneOne && consigneTwo) {
       if (lesson.contents === undefined) {
         setLesson({
-          title, consigneOne, consigneTwo, contents: [], id: nanoid(),
+          title, consigneOne, consigneTwo, contents: [], id: nanoid(), userId: user.id,
         });
       }
       openMyChild(true);

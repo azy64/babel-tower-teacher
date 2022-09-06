@@ -75,8 +75,9 @@ export const signInStudent = createAsyncThunk('login/signSt', (student) => {
     .then((data) => data);
 });
 export const signInTeacher = createAsyncThunk('login/signInT', (teacher) => {
-  const { email, password } = teacher.payload;
-  return fetch(`${BABEL_TOWER_BASE_URL}teacher/login`, {
+  console.log('teacher avant to send:', teacher);
+  const { email, password } = teacher;
+  return fetch(`${BABEL_TOWER_BASE_URL}teacher/login-teacher`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -117,7 +118,8 @@ const loginSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(signInTeacher.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.loading = false;
+      if (state.user) state.loading = false;
+      else state.loading = true;
     });
     builder.addCase(signInTeacher.rejected, (state, action) => {
       state.error = action.error.message;

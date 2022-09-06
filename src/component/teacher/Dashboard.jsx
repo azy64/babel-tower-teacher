@@ -3,6 +3,7 @@ import Menu from './Menu';
 
 function Dashboard() {
   const tab = [
+    { name: 'ClassRoom', url: '/classrooms', id: 2 },
     { name: 'Lesson', url: '/lesson', id: 1 },
     { name: 'Contenu', url: '/contenu', id: 2 },
   ];

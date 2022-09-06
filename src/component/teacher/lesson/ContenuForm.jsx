@@ -9,16 +9,19 @@ function ContenuForm({
   const [libelle, setLibelle] = useState('');
   const [fichier, setFichier] = useState('');
   const [typeContenu, setTypeContenu] = useState('');
+  const [lecture, setLecture] = useState('');
   const [error, setError] = useState({});
   const [id, setId] = useState('');
   const ref = useRef();
+  const lectureRef = useRef();
   useEffect(() => {
     setTypeContenu(ref.current.value);
+    setLecture(lectureRef.current.value);
   });
   const save = () => {
     const lessonOb = { ...lesson };
     const el = {
-      libelle, fichier, typeContenu, questions: [], id: nanoid(),
+      libelle, fichier, typeContenu, questions: [], id: nanoid(), lecture,
     };
     // setLastElement(el);
     setId(el.id);
@@ -26,6 +29,7 @@ function ContenuForm({
     setLesson(lessonOb);
   };
   const submit = (e) => {
+    e.preventDefault();
     if (libelle && fichier && typeContenu) {
       const lastId = lesson.contents[lesson.contents.length - 1]?.id ?? -1;
       if (lastId !== id) { save(); }
@@ -36,10 +40,10 @@ function ContenuForm({
         fichier: 'Veuillez selectionner un fichier!',
         type: 'Veuillez selectionner un type de fihcier!',
       });
-      e.preventDefault();
     }
   };
   const addContent = (e) => {
+    e.preventDefault();
     if (libelle && fichier && typeContenu) {
       const lastId = lesson.contents[lesson.contents.length - 1]?.id ?? -1;
       if (lastId !== id) { save(); }
@@ -50,7 +54,6 @@ function ContenuForm({
         fichier: 'Veuillez selectionner un fichier!',
         type: 'Veuillez selectionner un type de fihcier!',
       });
-      e.preventDefault();
     }
   };
   return (
@@ -84,6 +87,14 @@ function ContenuForm({
           <select onChange={(e) => setTypeContenu(e.target.value)} ref={ref}>
             <option value="audio">Audio</option>
             <option value="video">Video</option>
+          </select>
+          <span className="bad">{error.type}</span>
+        </div>
+        <div className="block-input">
+          <select onChange={(e) => setLecture(e.target.value)} ref={lectureRef}>
+            <option value="repetition 1">Repetition 1</option>
+            <option value="repetition 2">Repetition 2</option>
+            <option value="repetition 3">Repetition 3</option>
           </select>
           <span className="bad">{error.type}</span>
         </div>

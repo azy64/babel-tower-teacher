@@ -1,6 +1,6 @@
 export const BABEL_TOWER_REDUX_LOGIN_STUDENT = 'BABEL_TOWER_REDUX_LOGIN_STUDENT';
 export const BABEL_TOWER_REDUX_LOGIN_TEACHER = 'BABEL_TOWER_REDUX_LOGIN_TEACHER';
-export const BABEL_TOWER_BASE_URL = 'http://localhost/babel_tower/public/';
+export const BABEL_TOWER_BASE_URL = 'http://localhost:8000/'; // babel_tower/public/';
 export const BABEL_TOWER_REDUX_LOGIN_DISPLAY = 'BABEL_TOWER_REDUX_LOGIN_DISPLAY';
 
 export const loginStudent = (student) => ({

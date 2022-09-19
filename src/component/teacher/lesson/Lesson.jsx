@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ContenuForm from './ContenuForm';
 import DisplayLessons from './DisplayLessons';
 import LessonForm from './LessonForm';
@@ -9,11 +10,17 @@ function Lesson() {
   const [lessonFormVisibility, setLessonFormVisibility] = useState(false);
   const [contentFormVisibility, setContentFormVisibility] = useState(false);
   const [questionFormVisibility, setQuestionFormVisibility] = useState(false);
-  const lessonsInDataBase = useSelector((state) => state.lessons);
+  const lessonsInDataBase = useSelector((state) => state.lesson.lessons);
   const [lesson, setLesson] = useState({});
+  const user = useSelector((state) => state.login.user);
+  const navigator = useNavigate();
+
+  useEffect(() => {
+    if (Object.entries(user).length === 0) navigator('/');
+  }, [user]);
   return (
     <div>
-      <h1> Lesson</h1>
+      <h1> Mes Leçons</h1>
       <div>
         <div>
           <button
@@ -24,7 +31,7 @@ function Lesson() {
             Ajouter une nouvelle leçon
           </button>
         </div>
-        <span>Affichage des leçons ici</span>
+        <span>Mes leçons</span>
         <div>
           <DisplayLessons lessons={lessonsInDataBase} />
         </div>

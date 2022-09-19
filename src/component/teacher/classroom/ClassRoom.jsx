@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CLassRoomForm from './CLassRoomForm';
 import DisplayClassRooms from './DisplayClassRooms';
 
 function ClassRoom() {
   const [classRoomFormVisibility, setClassRoomFormVisibility] = useState(false);
-  const classrooms = useSelector((state) => state.classRooms);
+  const classrooms = useSelector((state) => state.lesson.classRooms);
+  const user = useSelector((state) => state.login.user);
+  const navigator = useNavigate();
+  useEffect(() => {
+    if (Object.entries(user).length === 0) navigator('/');
+  }, [user]);
   return (
     <div>
-      <h1> Lesson</h1>
+      <h1> Mes classes de langues</h1>
       <div>
         <div>
           <button
@@ -16,10 +22,10 @@ function ClassRoom() {
             onClick={() => setClassRoomFormVisibility(!classRoomFormVisibility)}
             type="button"
           >
-            Ajouter une nouvelle classroom
+            Ajouter une nouvelle classe
           </button>
         </div>
-        <span>Affichage des classrooms ici</span>
+        <span>Mes classes</span>
         <div>
           <DisplayClassRooms classRooms={classrooms} />
         </div>

@@ -9,19 +9,18 @@ export default function Register() {
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
   const [langue, setLangue] = useState('');
-  const user = useSelector((state) => state.login.user.result);
+  const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-
-  });
+    if (Object.entries(user).length > 0) {
+      navigate('/');
+    }
+  }, [user]);
   const submit = () => {
     dispatch(regeisterTeacher({
       email, password, prenom, nom, langue,
     }));
-    if (user !== {} || user !== null) {
-      navigate('/dashboard');
-    }
   };
   return (
     <div className="login-block">

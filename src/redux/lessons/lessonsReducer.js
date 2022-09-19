@@ -15,24 +15,6 @@ const init = {
   lessonCount: 0,
 };
 
-/* const lessonsReducer = (state = init, action) => {
-  switch (action.type) {
-    case BABEL_TOWER_REDUX_LESSONS_ADD:
-      break;
-    case BABEL_TOWER_REDUX_LESSONS_REMOVE:
-      break;
-    case BABEL_TOWER_REDUX_LESSONS_ADD_CONTENT:
-      break;
-    case BABEL_TOWER_REDUX_LESSONS_FETCHING_ALL:
-      break;
-    case BABEL_TOWER_REDUX_LESSONS_REMOVE_CONTENT:
-      break;
-    default:
-      return state;
-  }
-  return state;
-};
-*/
 export const saveLesson = createAsyncThunk('lesson/save', (lesson) =>
 // eslint-disable-next-line no-restricted-syntax
   /* for (const el of lesson.entries) {
@@ -60,6 +42,22 @@ export const createClassRoom = createAsyncThunk('classroom/save', (formData) => 
 })
   .then((result) => result.json())
   .then((data) => data));
+
+export const getAllUserLessons = createAsyncThunk('lessons/all', (formData) => fetch(`${BABEL_TOWER_BASE_URL}lesson/all`, {
+  method: 'POST',
+  body: formData,
+})
+  .then((result) => result.json())
+  .then((data) => data));
+
+// ------------------------------------------------------------------------------------------------
+export const getAllClassroomUser = createAsyncThunk('classroom/all', (formData) => fetch(`${BABEL_TOWER_BASE_URL}classroom/all`, {
+  method: 'POST',
+  body: formData,
+})
+  .then((result) => result.json())
+  .then((data) => data));
+
 const lessonSlice = createSlice({
   initialState: init,
   name: 'lesson',
@@ -74,6 +72,7 @@ const lessonSlice = createSlice({
       state.retour = action.payload.lesson;
       state.lessons = action.payload.lessons;
       state.contents = action.payload.contenus;
+      state.saveLoading = false;
     });
     builder.addCase(saveLesson.rejected, (state) => {
       state.message = ' We got a problem with remote server';
@@ -86,12 +85,36 @@ const lessonSlice = createSlice({
       state.message = action.payload.message;
       state.classRooms = action.payload.classrooms;
       state.lessons = action.payload.lessons;
+      state.saveLoading = false;
     });
     builder.addCase(createClassRoom.rejected, (state) => {
       state.message = ' We got a problem with remote server';
     });
     builder.addCase(createClassRoom.pending, (state) => {
       state.saveLoading = true;
+    });
+    builder.addCase(getAllUserLessons.fulfilled, (state, action) => {
+      state.message = action.payload.message;
+      state.lessons = action.payload.lessons;
+      state.saveLoading = false;
+    });
+    builder.addCase(getAllUserLessons.pending, (state) => {
+      state.saveLoading = true;
+    });
+    builder.addCase(getAllUserLessons.rejected, (state) => {
+      state.message = ' We got a problem with remote server';
+    });
+
+    builder.addCase(getAllClassroomUser.fulfilled, (state, action) => {
+      state.message = action.payload.message;
+      state.classRooms = action.payload.classrooms;
+      state.saveLoading = false;
+    });
+    builder.addCase(getAllClassroomUser.pending, (state) => {
+      state.saveLoading = true;
+    });
+    builder.addCase(getAllClassroomUser.rejected, (state, action) => {
+      state.message = action.payload.error;
     });
   },
 });

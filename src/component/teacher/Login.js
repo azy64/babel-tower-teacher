@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+// import { loginTeacher } from '../../redux/login/loginAction';
 import { signInTeacher } from '../../redux/login/loginSlice';
 
 export default function Login() {
@@ -15,7 +16,16 @@ export default function Login() {
 
   useEffect(() => {
     setVanish(d);
+    if (localStorage.getItem('user')) {
+      // dispatch(loginTeacher(JSON.parse(localStorage.getItem('user'))));
+      const fake = JSON.parse(localStorage.getItem('user'));
+      setEmail(fake.email);
+      setPassword(fake.password);
+      // navigate('/dashboard');
+      // console.log('localStorage', fake, email);
+    }
     if (user?.email) {
+      localStorage.setItem('user', JSON.stringify(user));
       navigate('/dashboard');
     } else setError('Email ou mot de passe incorrecte');
   }, [d, user]);
@@ -29,10 +39,10 @@ export default function Login() {
   return (vanish === true
     ? (
       <div className="login-block" style={{ display: 'block' }}>
-        <h1>Login</h1>
+        <h1>Identifiez-Vous pour vous connecter</h1>
         <form>
           <div>
-            <input onChange={((event) => { setEmail(event.target.value); })} type="email" placeholder="saisissez votre email" />
+            <input autoComplete="malik89@gmail.com allysaidi64@gmail.com" onChange={((event) => { setEmail(event.target.value); })} type="email" placeholder="saisissez votre email" />
           </div>
           <div>
             <input onChange={(event) => { setPassword(event.target.value); }} type="password" placeholder="saisissez votre mot de passe" />

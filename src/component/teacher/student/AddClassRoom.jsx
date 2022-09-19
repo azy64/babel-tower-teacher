@@ -2,12 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function AddLessons({ lessons, setMyList, myList }) {
+function AddClassRoom({ classrooms, myList, setMyList }) {
   const handleOnchange = (e) => {
     const id = parseInt(e.target.value, 10);
     const index = myList.findIndex((el) => el.id === id);
     if (index < 0) {
-      const el = lessons.filter((lesson) => lesson.id === id);
+      const el = classrooms.filter((lesson) => lesson.id === id);
       const list = [...myList, el[0]];
       setMyList(list);
       // console.log('ajout d\'un element de la liste de leçons:', list);
@@ -21,10 +21,10 @@ function AddLessons({ lessons, setMyList, myList }) {
     <div>
       {
             // () => (
-              lessons.map((lesson) => (
-                <div key={lesson.id}>
-                  <input onChange={handleOnchange} type="checkbox" value={lesson.id} name={lesson.id} id={`lesson${lesson.id}`} />
-                  <label htmlFor={lesson.id}>{lesson.title}</label>
+              classrooms.map((classroom) => (
+                <div key={classroom.id}>
+                  <input onChange={handleOnchange} type="checkbox" value={classroom.id} name={classroom.id} id={`lesson${classroom.id}`} />
+                  <label htmlFor={classroom.id}>{classroom.nom}</label>
                 </div>
               ))
            // )
@@ -33,9 +33,9 @@ function AddLessons({ lessons, setMyList, myList }) {
   );
 }
 
-AddLessons.propTypes = {
-  lessons: PropTypes.array.isRequired,
+AddClassRoom.propTypes = {
+  classrooms: PropTypes.array.isRequired,
   myList: PropTypes.array.isRequired,
   setMyList: PropTypes.func.isRequired,
 };
-export default AddLessons;
+export default AddClassRoom;

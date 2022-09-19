@@ -13,7 +13,7 @@ function LessonForm({
   const [consigneOne, setConsigneOne] = useState('');
   const [consigneTwo, setConsigneTwo] = useState('');
   const [error, setError] = useState('');
-  const user = useSelector((state) => state.login.user);
+  const user = JSON.parse(localStorage.getItem('user')) ?? useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   const submit = (e) => {
     if (title && consigneOne && consigneTwo) {

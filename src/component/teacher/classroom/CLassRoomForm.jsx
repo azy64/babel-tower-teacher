@@ -8,8 +8,8 @@ function CLassRoomForm({
   close,
 }) {
   const [nom, setNom] = useState('');
-  const user = useSelector((state) => state.login.user);
-  const lessons = useSelector((state) => state.lessons);
+  const user = JSON.parse(localStorage.getItem('user')) ?? useSelector((state) => state.login.user);
+  const lessons = useSelector((state) => state.lesson.lessons);
   const [error, setError] = useState('');
   const [myList, setMyList] = useState([]);
   const dispatch = useDispatch();
@@ -20,11 +20,11 @@ function CLassRoomForm({
   const submit = (e) => {
     e.preventDefault();
     if (nom) {
-      const classroom = { nom, lessons, userId: user.id };
+      const classroom = { nom, lessons: myList, userId: user.id };
       const formData = new FormData();
       formData.append('classroom', JSON.stringify(classroom));
       dispatch(createClassRoom(formData));
-      close(close);
+      close(false);
     } else {
       setError({
         nom: 'le libelle de la leçon n\'est pas etre vide',

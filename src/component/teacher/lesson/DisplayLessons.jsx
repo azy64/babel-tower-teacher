@@ -4,18 +4,16 @@ import PropTypes from 'prop-types';
 
 function DisplayLessons({ lessons }) {
   return (
-    <div>
+    <div style={{ width: '89%', margin: 'auto', padding: '10px' }}>
       {
-            () => (
               lessons.map((lesson) => (
                 <div key={lesson.id} className="classroom">
                   <h3>{ lesson.title }</h3>
                   <span>
-                    { `${lesson.contenus.length} contenus`}
+                    { `${lesson.contenus.length} contenu(s)`}
                   </span>
                 </div>
               ))
-            )
         }
     </div>
   );

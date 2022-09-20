@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CLassRoomForm from './CLassRoomForm';
 import DisplayClassRooms from './DisplayClassRooms';
+import { getAllClassroomUser } from '../../../redux/lessons/lessonsReducer';
 
 function ClassRoom() {
+  const dispatch = useDispatch();
   const [classRoomFormVisibility, setClassRoomFormVisibility] = useState(false);
   const classrooms = useSelector((state) => state.lesson.classRooms);
   const user = useSelector((state) => state.login.user);
   const navigator = useNavigate();
+  const formData = new FormData();
+  formData.append('userId', user.id);
+  dispatch(getAllClassroomUser(formData));
   useEffect(() => {
     if (Object.entries(user).length === 0) navigator('/');
   }, [user]);

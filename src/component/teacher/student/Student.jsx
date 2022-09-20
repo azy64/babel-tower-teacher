@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector /* , useDispatch */ } from 'react-redux';
+import { useDispatch, useSelector /* , useDispatch */ } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { getStudents } from '../../../redux/login/loginSlice';
+import { getStudents } from '../../../redux/login/loginSlice';
 import StudentsForm from './StudentsForm';
 
 function Student() {
+  const dispatch = useDispatch();
+  // dispatch(getStudents(formData))
   const students = useSelector((state) => state.login.students) ?? [];
   const members = useSelector((state) => state.login.members) ?? [];
   const user = useSelector((state) => state.login.user);
@@ -13,13 +15,13 @@ function Student() {
   const formData = new FormData();
   // const dispatch = useDispatch();
   formData.append('userId', user.id);
-  // dispatch(getStudents(formDatasdsds));
+  dispatch(getStudents(formData));
   useEffect(() => {
     if (Object.entries(user).length === 0) navigator('/');
   }, [user]);
   return (
     <div>
-      <h1>Mes apprennants</h1>
+      <h1>Mes apprenants</h1>
       <div>
         <div>
           <button
@@ -27,9 +29,10 @@ function Student() {
             onClick={() => setClassRoomFormVisibility(!classRoomFormVisibility)}
             type="button"
           >
-            Ajouter un nouvel Etudiant
+            Ajouter un nouvel apprenant
           </button>
         </div>
+        <span>Mes apprenants</span>
         <div>
           {
             students.map((student) => (

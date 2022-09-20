@@ -10,9 +10,11 @@ import Contenu from './component/teacher/Contenu';
 import ClassRoom from './component/teacher/classroom/ClassRoom';
 import Student from './component/teacher/student/Student';
 import Menu from './component/teacher/Menu';
+import Loader from './component/Loader';
 
 function App() {
   const user = useSelector((state) => state.login.user);
+  const loader = useSelector((state) => state.login.loading);
   const tab = [
     { name: 'Classes', url: '/classroom', id: 3 },
     { name: 'Leçons', url: '/lesson', id: 1 },
@@ -34,6 +36,9 @@ function App() {
         <Route path="classroom" element={<ClassRoom />} />
         <Route path="students" element={<Student />} />
       </Routes>
+      {
+        loader === true ? <Loader /> : <div />
+      }
     </div>
 
   );

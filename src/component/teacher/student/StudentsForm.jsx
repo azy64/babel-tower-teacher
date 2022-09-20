@@ -52,25 +52,25 @@ function StudentsForm({ close }) {
             X
           </span>
         </div>
-        <h1 className="text-center">Formulaire de creation d&apos;un Etudiant</h1>
+        <h1 className="text-center">Formulaire d&apos;enregistrement des apprenants</h1>
         <div className="block-input">
-          <input type="text" onChange={(e) => setNom(e.target.value)} placeholder="Votre nom" />
+          <input type="text" onChange={(e) => setNom(e.target.value)} placeholder="Nom" />
           <span className="bad">{error.nom}</span>
         </div>
         <div className="block-input">
-          <input type="text" onChange={(e) => setPrenom(e.target.value)} placeholder="Votre prenom" />
+          <input type="text" onChange={(e) => setPrenom(e.target.value)} placeholder="Prenom" />
           <span className="bad">{error.prenom}</span>
         </div>
         <div className="block-input">
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Votre Email" />
+          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
           <span className="bad">{error.email}</span>
         </div>
         <div className="block-input">
-          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Votre mot de passe" />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" />
           <span className="bad">{error.password}</span>
         </div>
         <div className="block-input">
-          <h3>Selection les leçons pour la classe courante</h3>
+          <h3>Selectionnez la classe de votre apprenant</h3>
           {
             classrooms.length === 0 ? 'Commencer par creer des lessons puis des classes' : ' '
           }

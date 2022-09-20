@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getAllClassroomUser, getAllUserLessons } from '../../redux/lessons/lessonsReducer';
-import { getStudents } from '../../redux/login/loginSlice';
+import { /* getAllClassroomUser, */ getAllUserLessons } from '../../redux/lessons/lessonsReducer';
+// import { getStudents } from '../../redux/login/loginSlice';
 import babelImage from '../../images/babel2.png';
 
 function Dashboard() {
@@ -12,8 +12,8 @@ function Dashboard() {
   formData.append('userId', userID);
   const dispatch = useDispatch();
   dispatch(getAllUserLessons(formData));
-  dispatch(getAllClassroomUser(formData));
-  dispatch(getStudents(formData));
+  // dispatch(getAllClassroomUser(formData));
+  // dispatch(getStudents(formData));
   const navigator = useNavigate();
 
   useEffect(() => {

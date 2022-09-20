@@ -27,7 +27,7 @@ function LessonForm({
         });
 
         setLesson(formData);
-        console.log('voici la lesson avant to send:', formData.get('fichier'));
+        // console.log('voici la lesson avant to send:', formData.get('fichier'));
         dispatch(saveLesson(formData));
       } else {
         alert('ajouter au moins un contenu');

@@ -45,13 +45,13 @@ function CLassRoomForm({
             X
           </span>
         </div>
-        <h1 className="text-center">Formulaire de creation d&apos;une classroom</h1>
+        <h1 className="text-center">Formulaire de creation d&apos;une classe</h1>
         <div className="block-input">
           <input type="text" onChange={(e) => setNom(e.target.value)} placeholder="Libellé de la leçon" />
           <span className="bad">{error.nom}</span>
         </div>
         <div className="block-input">
-          <h3>Selection les leçons pour la classe courante</h3>
+          <h3>Selectionnez  au moins une leçon pour cette classe</h3>
           <div className="list">
             <AddLessons setMyList={setMyList} lessons={lessons} myList={myList} />
           </div>

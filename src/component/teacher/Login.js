@@ -8,7 +8,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const d = useSelector((state) => state.login.loading);
+  const d = useSelector((state) => state.login.log);
   const user = useSelector((state) => state.login.user);
   const [vanish, setVanish] = useState(d);
   const [error, setError] = useState('');

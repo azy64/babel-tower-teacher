@@ -7,7 +7,8 @@ const init = {
   user: {},
   students: [],
   members: [],
-  loading: true,
+  loading: false,
+  log: true,
 };
 
 /* const loginReducer = (state = init, action) => {
@@ -77,7 +78,7 @@ export const signInStudent = createAsyncThunk('login/signSt', (student) => {
     .then((data) => data);
 });
 export const signInTeacher = createAsyncThunk('login/signInT', (teacher) => {
-  console.log('teacher avant to send:', teacher);
+  // console.log('teacher avant to send:', teacher);
   const { email, password } = teacher;
   return fetch(`${BABEL_TOWER_BASE_URL}teacher/login-teacher`, {
     method: 'POST',
@@ -124,10 +125,7 @@ export const getStudents = createAsyncThunk('student/all', (formData) => fetch(`
   body: formData,
 })
   .then((result) => result.json())
-  .then((data) => {
-    console.log('getStudents:', data);
-    return data;
-  }));
+  .then((data) => data));
 
 const loginSlice = createSlice({
   initialState: init,
@@ -154,29 +152,49 @@ const loginSlice = createSlice({
       state.error = action.error.message;
       state.loading = false;
     });
+    builder.addCase(signInTeacher.pending, (state) => {
+      // state.error = action.error.message;
+      state.loading = true;
+    });
+    // -----------------------------------------------------------------------------
     builder.addCase(signInStudent.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.loading = true;
+      state.loading = false;
     });
     builder.addCase(signInStudent.pending, (state) => {
       state.loading = true;
     });
+    builder.addCase(signInStudent.rejected, (state) => {
+      state.loading = false;
+    });
+    // --------------------------------------------------------------
     builder.addCase(regeisterTeacher.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.message = action.payload.message;
+      state.loading = false;
+    });
+    builder.addCase(regeisterTeacher.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(regeisterTeacher.rejected, (state, action) => {
       state.error = action.error.message;
+      state.loading = true;
     });
     // --------------------------------------------------------------
     builder.addCase(registerStudent.fulfilled, (state, action) => {
       state.students = action.payload.students;
       state.members = action.payload.members;
       state.message = action.payload.message;
+      state.loading = false;
     });
     builder.addCase(registerStudent.rejected, (state) => {
       // state.students = action.payload.members;
       state.message = 'error happened somewhere!!!!';
+      state.loading = false;
+    });
+    builder.addCase(registerStudent.pending, (state) => {
+      // state.students = action.payload.members;
+      state.loading = true;
     });
     // -------------------------------------------------------
     builder.addCase(getStudents.fulfilled, (state, action) => {
@@ -188,9 +206,9 @@ const loginSlice = createSlice({
     builder.addCase(getStudents.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getStudents.rejected, (state) => {
+    builder.addCase(getStudents.rejected, (state, action) => {
       state.loading = false;
-      // state.message = action.payload.error;
+      state.message = action?.error?.message;
     });
   },
 });

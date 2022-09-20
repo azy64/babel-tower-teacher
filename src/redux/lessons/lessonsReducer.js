@@ -114,7 +114,7 @@ const lessonSlice = createSlice({
       state.saveLoading = true;
     });
     builder.addCase(getAllClassroomUser.rejected, (state, action) => {
-      state.message = action.payload.error;
+      state.message = action.error?.message;
     });
   },
 });

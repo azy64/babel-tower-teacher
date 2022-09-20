@@ -18,7 +18,7 @@ function Student() {
   dispatch(getStudents(formData));
   useEffect(() => {
     if (Object.entries(user).length === 0) navigator('/');
-  }, [user]);
+  }, []);
   return (
     <div>
       <h1>Mes apprenants</h1>

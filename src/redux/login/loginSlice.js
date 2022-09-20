@@ -126,7 +126,7 @@ export const getStudents = createAsyncThunk('student/all', (formData) => fetch(`
 })
   .then((result) => result.json())
   .then((data) => data));
-
+// ---------------------------------------------------------------
 const loginSlice = createSlice({
   initialState: init,
   name: 'login',

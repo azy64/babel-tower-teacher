@@ -5,18 +5,22 @@ import CLassRoomForm from './CLassRoomForm';
 import DisplayClassRooms from './DisplayClassRooms';
 import { getAllClassroomUser } from '../../../redux/lessons/lessonsReducer';
 
-function ClassRoom() {
+const ClassRoom = () => {
   const dispatch = useDispatch();
   const [classRoomFormVisibility, setClassRoomFormVisibility] = useState(false);
   const classrooms = useSelector((state) => state.lesson.classRooms);
   const user = useSelector((state) => state.login.user);
+  const lessons = useSelector((state) => state.lesson.lessons);
   const navigator = useNavigate();
   const formData = new FormData();
-  formData.append('userId', user.id);
-  dispatch(getAllClassroomUser(formData));
+
   useEffect(() => {
     if (Object.entries(user).length === 0) navigator('/');
-  }, [user]);
+    if (Object.entries(user).length > 0) {
+      formData.append('userId', user.id);
+      dispatch(getAllClassroomUser(formData));
+    }
+  }, []);
   return (
     <div>
       <h1> Mes classes de langues</h1>
@@ -32,7 +36,7 @@ function ClassRoom() {
         </div>
         <span>Mes classes</span>
         <div>
-          <DisplayClassRooms classRooms={classrooms} />
+          <DisplayClassRooms classRooms={classrooms} lessons={lessons} />
         </div>
       </div>
       <div>
@@ -45,6 +49,6 @@ function ClassRoom() {
       </div>
     </div>
   );
-}
+};
 
 export default ClassRoom;

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getStudents } from '../../../redux/login/loginSlice';
 import StudentsForm from './StudentsForm';
 
-function Student() {
+const Student = () => {
   const dispatch = useDispatch();
   // dispatch(getStudents(formData))
   const students = useSelector((state) => state.login.students) ?? [];
@@ -14,11 +14,14 @@ function Student() {
   const navigator = useNavigate();
   const formData = new FormData();
   // const dispatch = useDispatch();
-  formData.append('userId', user.id);
-  dispatch(getStudents(formData));
+
   useEffect(() => {
     if (Object.entries(user).length === 0) navigator('/');
-  }, []);
+    if (Object.entries(user).length > 0) {
+      formData.append('userId', user.id);
+      dispatch(getStudents(formData));
+    }
+  }, [user]);
   return (
     <div>
       <h1>Mes apprenants</h1>
@@ -72,6 +75,6 @@ function Student() {
       </div>
     </div>
   );
-}
+};
 
 export default Student;

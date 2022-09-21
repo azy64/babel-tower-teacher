@@ -1,14 +1,11 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { useSelector } from 'react-redux';
 
-function DisplayClassRooms() {
-  const classRooms = useSelector((state) => state.lesson.classRooms);
-  const lessons = useSelector((state) => state.lesson.lessons);
-  return (
-    <div>
-      {
+const DisplayClassRooms = ({ classRooms, lessons }) => (
+  <div>
+    {
             // () => (
               classRooms.map((classroom) => (
                 <div key={classroom.id} className="classroom">
@@ -20,12 +17,11 @@ function DisplayClassRooms() {
               ))
            // )
         }
-    </div>
-  );
-}
-
-/* DisplayClassRooms.propTypes = {
+  </div>
+);
+DisplayClassRooms.propTypes = {
   classRooms: PropTypes.array.isRequired,
+  lessons: PropTypes.array.isRequired,
 };
-*/
+
 export default DisplayClassRooms;

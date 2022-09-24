@@ -145,7 +145,8 @@ const loginSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(signInTeacher.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user ?? {};
+      state.message = action.payload.message;
       state.loading = false;
     });
     builder.addCase(signInTeacher.rejected, (state, action) => {

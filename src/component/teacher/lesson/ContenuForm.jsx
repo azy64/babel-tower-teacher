@@ -26,6 +26,7 @@ function ContenuForm({
     // setLastElement(el);
     setId(el.id);
     lessonOb.contents.push(el);
+    // console.log('content pendant le save:', lessonOb.contents);
     setLesson(lessonOb);
   };
   const submit = (e) => {
@@ -72,7 +73,7 @@ function ContenuForm({
         </div>
         <h1 className="text-center">Formulaire de creation de Contenu</h1>
         <div className="block-input">
-          <input type="text" onChange={(e) => setLibelle(e.target.value)} placeholder="Titre de fichier" />
+          <input name="file-title" type="text" onChange={(e) => setLibelle(e.target.value)} placeholder="Titre de fichier" />
           <span className="bad">{error.titre}</span>
         </div>
         <div className="block-input">
@@ -80,18 +81,21 @@ function ContenuForm({
             type="file"
             onChange={(e) => setFichier(e.target.files[0])}
             placeholder="selection un fihier"
+            accept="video/*, audio/*"
+            max-file-size="10000000000"
+            maxsize="150MB"
           />
           <span className="bad">{error.fichier}</span>
         </div>
         <div className="block-input">
-          <select onChange={(e) => setTypeContenu(e.target.value)} ref={ref}>
+          <select name="type-contenu" onChange={(e) => setTypeContenu(e.target.value)} ref={ref}>
             <option value="audio">Audio</option>
             <option value="video">Video</option>
           </select>
           <span className="bad">{error.type}</span>
         </div>
         <div className="block-input">
-          <select onChange={(e) => setLecture(e.target.value)} ref={lectureRef}>
+          <select name="repetition" onChange={(e) => setLecture(e.target.value)} ref={lectureRef}>
             <option value="repetition 1">Repetition 1</option>
             <option value="repetition 2">Repetition 2</option>
             <option value="repetition 3">Repetition 3</option>

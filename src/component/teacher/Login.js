@@ -24,11 +24,17 @@ export default function Login() {
       // navigate('/dashboard');
       // console.log('localStorage', fake, email);
     }
-    if (user?.email) {
+    if (Object.entries(user).length > 0) {
+      console.log('user Object:', Object.entries(user).length);
       localStorage.setItem('user', JSON.stringify(user));
+      setError('');
       navigate('/dashboard');
     } else setError('Email ou mot de passe incorrecte');
   }, [d, user]);
+  /**
+   * cette fonction envoit l'email
+   * et le mot de passe à l'API pour checking
+   */
   const connecter = () => {
     dispatch(signInTeacher({ email, password }));
     // dispatch(loginDisplay());

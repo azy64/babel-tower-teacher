@@ -22,7 +22,8 @@ function LessonForm({
         formData.append('lesson', JSON.stringify(lesson));
         lesson.contents.map((content) => {
           const { fichier } = content;
-          formData.append(`fichier_${content.id}`, fichier, `${content.id}.${fichier.name.split('.')[1]}`);
+          const newName = `${content.id}.${fichier.name.split('.')[1]}`;
+          formData.append(`fichier_${content.id}`, fichier, newName);
           return content;
         });
 

@@ -99,6 +99,7 @@ function ContenuForm({
             <option value="repetition 1">Repetition 1</option>
             <option value="repetition 2">Repetition 2</option>
             <option value="repetition 3">Repetition 3</option>
+            <option value="normal">Normal</option>
           </select>
           <span className="bad">{error.type}</span>
         </div>

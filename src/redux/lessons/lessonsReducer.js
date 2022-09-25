@@ -13,6 +13,7 @@ const init = {
   classRooms: [],
   lectures: [],
   lessonCount: 0,
+  message: '',
 };
 
 export const saveLesson = createAsyncThunk('lesson/save', (lesson) =>

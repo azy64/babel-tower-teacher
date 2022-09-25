@@ -11,6 +11,7 @@ function Lesson() {
   const [contentFormVisibility, setContentFormVisibility] = useState(false);
   const [questionFormVisibility, setQuestionFormVisibility] = useState(false);
   const lessonsInDataBase = useSelector((state) => state.lesson.lessons);
+  const message = useSelector((state) => state.lesson.message);
   const [lesson, setLesson] = useState({});
   const user = useSelector((state) => state.login.user);
   const navigator = useNavigate();
@@ -30,6 +31,12 @@ function Lesson() {
           >
             Ajouter une nouvelle leçon
           </button>
+          <div style={{
+            padding: '5px', textAlign: 'center', background: 'green', width: '100px', margin: 'auto',
+          }}
+          >
+            {{ message }}
+          </div>
         </div>
         <span>Mes leçons</span>
         <div>
